@@ -1,8 +1,9 @@
 import * as userService from '../services/userService.js';
 
 export const addUser = async (req, res) => {
+	const { name, password, email } = req.body;
 	try {
-		await userService.addUser();
+		await userService.addUser(name, password, email);
 	} catch (error) {
 		console.error(error);
 	}

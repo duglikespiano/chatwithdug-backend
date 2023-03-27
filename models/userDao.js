@@ -1,6 +1,12 @@
 import { myDataSource } from '../database/dataBase.js';
 
-export const addUser = async (req, res) => {};
+export const addUser = async (name, hashedPassword, email) => {
+	console.log('dao', name, hashedPassword, email);
+	await myDataSource.query(
+		`INSERT INTO user (name, password, email)VALUES (? , ?, ?)`,
+		[name, hashedPassword, email]
+	);
+};
 
 export const checkUser = async (sort, value) => {
 	const data = await myDataSource.query(`SELECT * FROM user WHERE ?? = ?`, [

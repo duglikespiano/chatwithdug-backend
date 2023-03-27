@@ -3,11 +3,10 @@ import jwt from 'jsonwebtoken';
 import * as userDao from '../models/userDao.js';
 import { jwtSecretKey, bcryptSaltRounds } from '../env.js';
 
-export const addUser = async (password) => {
+export const addUser = async (name, password, email) => {
 	await bcrypt
-		.hash(password, bcryptSaltRounds)
-		.then((hashedPassword) => console.log(hashedPassword));
-	await userDao.addUser();
+		.hash(password, parseInt(bcryptSaltRounds))
+		.then((hashedPassword) => userDao.addUser(name, hashedPassword, email));
 };
 
 export const checkUser = async (sort, value) => {
