@@ -3,14 +3,41 @@ import { Server } from 'socket.io';
 import { httpServer } from '../app.js';
 import { findUserByToken } from './auth.js';
 
+// 접속 된 모든 사용자의 정보를 담을 배열
+let connector = [];
+
+export const checkUser = async (req, res) => {
+	console.log(req.body);
+	let count = 0;
+	const { name } = req.body;
+	try {
+		const checkIfConnected = () => {
+			connector.forEach((item) => {
+				if (item.userName.includes(name)) {
+					count++;
+				}
+			});
+		};
+
+		checkIfConnected();
+
+		if (count !== 0) {
+			throw new Error('ALREADY CONNECTED BY THE USERNAME');
+		} else {
+			res.status(200).json({ message: 'GOOD TO GO' });
+			count = 0;
+		}
+	} catch (error) {
+		console.error(error);
+		error.statusCode = 400;
+		res.status(error.statusCode).json({ message: error.message });
+	}
+};
+
 export const socketStart = () => {
 	const wsServer = new Server(httpServer);
 	// const socketConnectorIds = [...socket.adapter.sids.keys()];
-
 	console.log('다시 시작하자!');
-
-	// 접속 된 모든 사용자의 정보를 담을 배열
-	let connector = [];
 
 	// 사용자가 main page에 접속 시, socket server에 접속
 	wsServer.on('connection', (socket) => {

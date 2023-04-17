@@ -23,8 +23,10 @@ export const sendTestRequestMail = async (req, res) => {
                You gotta hurry!<br>
                Go!`, // html body
 		});
+		res.status(200).json({ message: 'NOTIFICATION MAIL SENT' });
 	} catch (error) {
 		console.error(error);
+		error.statusCode = 400;
+		res.status(error.statusCode).json({ message: error.message });
 	}
-	res.status(200).json({ message: 'data have arrived!' });
 };

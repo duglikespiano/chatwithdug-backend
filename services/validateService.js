@@ -29,11 +29,11 @@ export const requestValidateCode = (email) => {
 			// send mail with defined transport object
 			await transporter.sendMail({
 				to: email, // list of receivers
-				subject: '[Chat with Dug] verification code for sign up', // Subject line
+				subject: '[Chat with Dug] validation code for sign up', // Subject line
 				html: `Hi,<br>
-           your email verification code is <b>${validateCode}</b>.<br>
-           Please input your verification code on sign up page.<br>
-           This verification code expires in <b>3mins<b><br>
+           your email validation code is <b>${validateCode}</b>.<br>
+           Please input your validation code on sign up page.<br>
+           This validation code expires in <b>3mins<b><br>
            Thanks!`, // html body
 			});
 		};
