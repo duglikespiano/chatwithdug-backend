@@ -33,3 +33,7 @@ app.use((req, res, next) => {
 app.use(router);
 
 socketStart();
+
+app.get('/ping', (req, res) => {
+	res.status(200).json({ message: 'PONG!' });
+});
