@@ -11,6 +11,14 @@ router.post('/signup', (req, res) => {
 	userController.addUser(req, res);
 });
 
+router.post('/password', (req, res) => {
+	userController.resetPassword(req, res);
+});
+
+router.get('/checkUserMatch', (req, res) => {
+	userController.checkUserMatch(req, res);
+});
+
 router.get('/signup', (req, res) => {
 	userController.checkUser(req, res);
 });

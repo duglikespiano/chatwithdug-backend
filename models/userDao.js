@@ -21,3 +21,18 @@ export const signInUser = async (name) => {
 	]);
 	return data[0];
 };
+
+export const checkUserMatch = async (name, email) => {
+	const data = await myDataSource.query(
+		`SELECT * FROM user WHERE name = ? AND email = ?`,
+		[name, email]
+	);
+	return data[0];
+};
+
+export const resetPassword = async (name, email, hashedPassword) => {
+	await myDataSource.query(
+		`UPDATE user SET password = ? WHERE name = ? AND email = ?`,
+		[hashedPassword, name, email]
+	);
+};

@@ -25,3 +25,15 @@ export const signInUser = async (nameInput, passwordInput) => {
 		}
 	});
 };
+
+export const checkUserMatch = async (name, email) => {
+	return await userDao.checkUserMatch(name, email);
+};
+
+export const resetPassword = async (name, email, password) => {
+	await bcrypt
+		.hash(password, parseInt(bcryptSaltRounds))
+		.then((hashedPassword) =>
+			userDao.resetPassword(name, email, hashedPassword)
+		);
+};
