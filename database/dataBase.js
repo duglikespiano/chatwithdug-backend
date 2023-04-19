@@ -1,17 +1,12 @@
-import mysql from 'mysql2';
+import mariadb from 'mariadb';
 import { dbName, dbHost, dbUser, dbPassword } from '../env.js';
+import { query } from 'express';
 
-const pool = mysql.createPool({
+export const myDataSource = mariadb.createPool({
 	database: dbName,
 	host: dbHost,
 	user: dbUser,
 	password: dbPassword,
-
-	// database: 'chat',
-	// host: '127.0.0.1',
-	// user: 'root',
-	// password: '',
 });
 
-export const myDataSource = pool.promise();
 myDataSource.getConnection().then(() => console.log('database connected!'));

@@ -14,16 +14,21 @@ export const checkUser = async (sort, value) => {
 };
 
 export const signInUser = async (nameInput, passwordInput) => {
-	const { name, password, email } = await userDao.signInUser(nameInput);
-	return await bcrypt.compare(passwordInput, password).then((result) => {
-		if (result === true) {
-			return {
-				token: jwt.sign({ name: name, email: email }, jwtSecretKey),
-				name: name,
-				email: email,
-			};
-		}
-	});
+	const [data] = await userDao.signInUser(nameInput);
+	if (data !== undefined) {
+		const { name, password, email } = data;
+		return await bcrypt.compare(passwordInput, password).then((result) => {
+			if (result === true) {
+				return {
+					token: jwt.sign({ name: name, email: email }, jwtSecretKey),
+					name: name,
+					email: email,
+				};
+			}
+		});
+	} else {
+		throw new Error('NO USER DATA IN DB');
+	}
 };
 
 export const checkUserMatch = async (name, email) => {

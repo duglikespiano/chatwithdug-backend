@@ -37,7 +37,7 @@ export const requestValidateCode = (email) => {
 		});
 	};
 
-	// main(email, validateCode).catch(console.error);
+	main(email, validateCode).catch(console.error);
 
 	return validateCode;
 };

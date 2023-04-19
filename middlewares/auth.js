@@ -6,6 +6,6 @@ export const findUserByToken = (token) => {
 		const { name } = jwt.decode(token, jwtSecretKey);
 		return name;
 	} catch (error) {
-		console.error('token이없어');
+		console.error('USER HAS NO TOKEN');
 	}
 };

@@ -7,7 +7,6 @@ import { findUserByToken } from './auth.js';
 let connector = [];
 
 export const checkUser = async (req, res) => {
-	console.log(req.body);
 	let count = 0;
 	const { name } = req.body;
 	try {
