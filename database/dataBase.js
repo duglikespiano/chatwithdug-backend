@@ -1,6 +1,5 @@
 import mariadb from 'mariadb';
 import { dbName, dbHost, dbUser, dbPassword } from '../env.js';
-import { query } from 'express';
 
 export const myDataSource = mariadb.createPool({
 	database: dbName,

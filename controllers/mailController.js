@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { gmailAppPassword } from '../env.js';
+import * as mailService from '../services/mailService.js';
 
 export const sendNotificationMail = async (req, res) => {
 	try {
@@ -27,5 +28,25 @@ export const sendNotificationMail = async (req, res) => {
 		console.error(error);
 		error.statusCode = 400;
 		res.status(error.statusCode).json({ message: error.message });
+	}
+};
+
+export const sendRequestValidateCodeMail = async (req, res) => {
+	try {
+		const { email } = req.query;
+		const validateCode = mailService.requestValidateCode(email);
+		res.status(200).json({ message: `VALIDATE CODE : ${validateCode}` });
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const checkValidateCode = (req, res) => {
+	try {
+		const { email, validateCode } = req.body;
+		const result = mailService.checkValidateCode(email, validateCode);
+		res.status(200).json({ result: result });
+	} catch (error) {
+		console.error(error);
 	}
 };

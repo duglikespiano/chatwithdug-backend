@@ -6,4 +6,12 @@ router.post('/notification', (req, res) => {
 	mailController.sendNotificationMail(req, res);
 });
 
+router.get('/validatecode', (req, res) => {
+	mailController.sendRequestValidateCodeMail(req, res);
+});
+
+router.post('/validatecode', (req, res) => {
+	mailController.checkValidateCode(req, res);
+});
+
 export default router;

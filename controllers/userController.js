@@ -4,10 +4,11 @@ export const addUser = async (req, res) => {
 	const { name, password, email } = req.body;
 	try {
 		await userService.addUser(name, password, email);
+		res.status(200).json({ message: 'data have arrived!' });
 	} catch (error) {
 		console.error(error);
+		res.status(error.statusCode).json({ message: error.message });
 	}
-	res.status(200).json({ message: 'data have arrived!' });
 };
 
 export const checkUser = async (req, res) => {
