@@ -35,8 +35,6 @@ export const checkUser = async (req, res) => {
 
 export const socketStart = () => {
 	const wsServer = new Server(httpServer);
-	// const socketConnectorIds = [...socket.adapter.sids.keys()];
-	console.log('다시 시작하자!');
 
 	// 사용자가 main page에 접속 시, socket server에 접속
 	wsServer.on('connection', (socket) => {
@@ -83,7 +81,7 @@ export const socketStart = () => {
 		});
 
 		// 사용자가 lobby에서 뒤로가기 버튼을 누를 때, 현재 lobby에 접속한 모든 사용자 정보를 갱신
-		socket.on('backButton', (reason) => {
+		socket.on('leavePage', (reason) => {
 			console.log(`Socket ID ${socket.id} is disconnected!`);
 			connector.splice(
 				connector.findIndex((item) => item.userSocketId === socket.id),
@@ -147,10 +145,6 @@ export const socketStart = () => {
 				wsServer.to(element6).emit('chatContents', data);
 			}
 		);
-
-		socket.on('roomNumber', (msg) => {
-			console.log(socket.rooms, '98번줄');
-		});
 
 		socket.on('status', (msg, boolean) => {
 			const index = connector.findIndex((item) => item.userSocketId === msg);

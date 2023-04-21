@@ -8,8 +8,4 @@ router.use('/users', usersRouter);
 router.use('/mail', mailRouter);
 router.use('/validatecode', validateCodeRouter);
 
-// app.get('/redirect', (req, res) => {
-// 	res.status(304).redirect('https://www.naver.com');
-// });
-
 export default router;

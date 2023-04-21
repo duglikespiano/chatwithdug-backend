@@ -45,8 +45,8 @@ export const requestValidateCode = (email) => {
 export const checkValidateCode = (email, validateCode) => {
 	const value = myCache.get(email);
 	if (validateCode === value) {
-		return `VALIDATE CODE CONFIRMED`;
+		return true;
 	} else {
-		return `INVALID CODE`;
+		return false;
 	}
 };

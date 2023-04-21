@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import { gmailAppPassword } from '../env.js';
 
-export const sendTestRequestMail = async (req, res) => {
+export const sendNotificationMail = async (req, res) => {
 	try {
 		const { name, email } = req.body;
 		let transporter = nodemailer.createTransport({
