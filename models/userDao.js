@@ -2,7 +2,7 @@ import { myDataSource } from '../database/dataBase.js';
 
 export const addUser = async (name, hashedPassword, email) => {
 	await myDataSource.query(
-		`INSERT INTO user (name, password, email)VALUES (? , ?, ?)`,
+		`INSERT INTO user (name, password, email)VALUES (?, ?, ?)`,
 		[name, hashedPassword, email]
 	);
 };

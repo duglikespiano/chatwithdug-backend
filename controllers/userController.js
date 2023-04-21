@@ -4,7 +4,7 @@ export const addUser = async (req, res) => {
 	const { name, password, email } = req.body;
 	try {
 		await userService.addUser(name, password, email);
-		res.status(200).json({ message: 'data have arrived!' });
+		res.status(200).json({ message: 'USER DATA ADDED' });
 	} catch (error) {
 		console.error(error);
 		res.status(error.statusCode).json({ message: error.message });
@@ -12,9 +12,13 @@ export const addUser = async (req, res) => {
 };
 
 export const checkUser = async (req, res) => {
-	const { sort, value } = req.query;
-	const data = await userService.checkUser(sort, value);
-	res.status(200).json({ data: data });
+	try {
+		const { sort, value } = req.query;
+		const data = await userService.checkUser(sort, value);
+		res.status(200).json({ data: data });
+	} catch (error) {
+		res.status(error.statusCode).json({ message: error.message });
+	}
 };
 
 export const signInUser = async (req, res) => {
