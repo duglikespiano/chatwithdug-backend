@@ -1,10 +1,12 @@
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import morgan from 'morgan';
 import router from './routers/index.js';
 import { socketStart } from './middlewares/socket.js';
 import { serverPort } from './env.js';
 const app = express();
+const myMorgan = morgan('combined');
 
 export const httpServer = http.createServer(app);
 export const serverStart = () => {
@@ -29,6 +31,8 @@ app.use((req, res, next) => {
 		return next();
 	}
 });
+
+app.use(myMorgan);
 
 app.use(router);
 
