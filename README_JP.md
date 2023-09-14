@@ -17,7 +17,7 @@
 
 - Project タイトル: chatwithdug_backend
 - URL : https://chatwithdug.netlify.app
-- 期間 : 2023.03.01 - 進行中
+- 期間 : 2023.03.01 - 2023.03.01 - 2023.04.27(2 ヶ月)
 - 人員 : 1 人
 - 技術スタック : </br>
   <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=node.js&logoColor=white">
