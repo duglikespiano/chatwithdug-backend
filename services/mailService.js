@@ -28,6 +28,7 @@ export const requestValidateCode = (email) => {
 		// send mail with defined transport object
 		await transporter.sendMail({
 			to: email, // list of receivers
+			from: 'notificationfromdug@gmail.com',
 			subject: '[Chat with Dug] validation code for sign up', // Subject line
 			html: `Hi,<br>
            your email validation code is <b>${validateCode}</b>.<br>
