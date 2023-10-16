@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { gmailAppPassword } from '../env.js';
+import { gmailAddress, gmailName, gmailAppPassword } from '../env.js';
 import * as mailService from '../services/mailService.js';
 
 export const sendNotificationMail = async (req, res) => {
@@ -8,14 +8,18 @@ export const sendNotificationMail = async (req, res) => {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: 'notificationfromdug@gmail.com', // generated ethereal user
+				user: gmailAddress, // generated ethereal user
 				pass: gmailAppPassword, // generated ethereal password
 			},
 		});
 
 		// send mail with defined transport object
 		await transporter.sendMail({
-			to: 'notificationfromdug@gmail.com', // list of receivers
+			to: gmailAddress, // list of receivers
+			from: {
+				name: gmailName,
+				address: gmailAddress,
+			},
 			subject: `[Chat with Dug] user ${name} wants to chat with you`, // Subject line
 			html: `Hi,<br>
                User ${name} wants to chat with you</b>.<br>

@@ -1,5 +1,6 @@
 import NodeCache from 'node-cache';
 import nodemailer from 'nodemailer';
+import { gmailAddress, gmailName, gmailAppPassword } from '../env.js';
 const myCache = new NodeCache();
 
 export const requestValidateCode = (email) => {
@@ -20,15 +21,18 @@ export const requestValidateCode = (email) => {
 		let transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
-				user: 'notificationfromdug@gmail.com', // generated ethereal user
-				pass: 'vupbrvbwpjvtsqjj', // generated ethereal password
+				user: gmailAddress, // generated ethereal user
+				pass: gmailAppPassword, // generated ethereal password
 			},
 		});
 
 		// send mail with defined transport object
 		await transporter.sendMail({
 			to: email, // list of receivers
-			from: 'notificationfromdug@gmail.com',
+			from: {
+				name: gmailName,
+				address: gmailAddress,
+			},
 			subject: '[Chat with Dug] validation code for sign up', // Subject line
 			html: `Hi,<br>
            your email validation code is <b>${validateCode}</b>.<br>
